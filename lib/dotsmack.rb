@@ -40,6 +40,9 @@ module Dotsmack
     File.fnmatch(pattern, path)
   end
 
+  #
+  # Smacker dotfile scanner/enumerator.
+  #
   class Smacker
     attr_accessor :dotignore, :dotconfig, :path2ignore, :path2config
 
