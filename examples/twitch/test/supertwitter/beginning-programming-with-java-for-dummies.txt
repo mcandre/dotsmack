@@ -1,0 +1,1 @@
+1. Visit http://allmycode.com/BeginProg3 and download a file containing all the program examples in this book. 2. Visit www.oracle.com/technetwork/java/javase/downloads and get the JDK.
