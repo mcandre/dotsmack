@@ -209,7 +209,14 @@ module Dotsmack
       paths.each do |path|
         # STDIN idiom
         if path == '-'
-          files.append([path, config(Dir.pwd)])
+          files << [
+            path,
+            if @dotconfig.nil?
+              nil
+            else
+              config(Dir.pwd)
+            end
+          ]
         # Skip symlinks
         elsif File.symlink?(path)
           nil

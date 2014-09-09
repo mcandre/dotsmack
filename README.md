@@ -51,4 +51,7 @@ require 'yaml'
 
 $ examples/twitch/bin/twitch examples/twitch/test/
 examples/twitch/test/a-tale-of-two-cities.txt: 614
+
+$ examples/twitch/bin/twitch < examples/twitch/test/a-tale-of-two-cities.txt 
+-: 614
 ```

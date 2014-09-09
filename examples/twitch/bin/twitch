@@ -34,7 +34,12 @@ end
 def main
   dotsmack = Dotsmack::Smacker.new(dotignore = '.twitchignore', dotconfig = '.twitchrc.yml')
 
-  filenames = ARGV || ['-']
+  filenames =
+    if ARGV == []
+      ['-']
+    else
+      ARGV
+    end
 
   dotsmack.enumerate(filenames, DEFAULT_IGNORES).each do |filename, config|
     stream =
