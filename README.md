@@ -64,3 +64,41 @@ More examples:
 * [cowl](https://github.com/mcandre/cowl)
 * [gtdlint](https://github.com/mcandre/gtdlint)
 * [lili](https://github.com/mcandre/lili)
+
+# REQUIREMENTS
+
+* [Ruby](https://www.ruby-lang.org/) 2+
+
+# INSTALL
+
+Install via [RubyGems](http://rubygems.org/):
+
+```
+$ gem install aspelllint
+```
+
+# LICENSE
+
+FreeBSD
+
+# DEVELOPMENT
+
+## Testing
+
+Keep the interface working:
+
+```
+$ cucumber
+```
+
+## Linting
+
+Keep the code tidy:
+
+```
+$ rake lint
+```
+
+## Git Hooks
+
+See `hooks/`.
