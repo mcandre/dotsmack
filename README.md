@@ -56,3 +56,11 @@ examples/twitch/test/a-tale-of-two-cities.txt: 614
 $ examples/twitch/bin/twitch < examples/twitch/test/a-tale-of-two-cities.txt 
 -: 614
 ```
+
+More examples:
+
+* [aspelllint](https://github.com/mcandre/aspelllint)
+* [enlint](https://github.com/mcandre/enlint)
+* [cowl](https://github.com/mcandre/cowl)
+* [gtdlint](https://github.com/mcandre/gtdlint)
+* [lili](https://github.com/mcandre/lili)
