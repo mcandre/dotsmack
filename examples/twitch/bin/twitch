@@ -8,10 +8,10 @@ require 'rubygems'
 require 'dotsmack'
 require 'yaml'
 
-DEFAULT_IGNORES = [
-  '.twitchignore',
-  '.twitchrc.yml'
-]
+DEFAULT_IGNORES = %w(
+  .twitchignore
+  .twitchrc.yml
+)
 
 DEFAULT_CONFIG = {
   'maxchars' => 140
@@ -32,7 +32,11 @@ def twitch(tweet, config = nil)
 end
 
 def main
-  dotsmack = Dotsmack::Smacker.new(dotignore = '.twitchignore', dotconfig = '.twitchrc.yml')
+  dotsmack = Dotsmack::Smacker.new(
+    dotignore = '.twitchignore',
+    default_ignores = DEFAULT_IGNORES,
+    dotconfig = '.twitchrc.yml'
+  )
 
   filenames =
     if ARGV == []
@@ -41,7 +45,7 @@ def main
       ARGV
     end
 
-  dotsmack.enumerate(filenames, DEFAULT_IGNORES).each do |filename, config|
+  dotsmack.enumerate(filenames).each do |filename, config|
     stream =
       if filename == '-'
         STDIN

@@ -12,6 +12,7 @@ https://rubygems.org/gems/dotsmack
 
 Dotsmack is a Ruby library for adding modern dotfile customization to your Ruby applications.
 
+* Recursive file scanning, like `jshint .`
 * dotignore files - [fnmatch](http://man.cx/fnmatch) syntax, like `.gitignore`
 * dotconfig files - any format (getoptlong, YAML, JSON, ...)
 * Searches for dotfiles in `.`, `..`, etc., up to `$HOME`.

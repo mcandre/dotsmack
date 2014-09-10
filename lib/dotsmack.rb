@@ -19,32 +19,25 @@ module Dotsmack
   HOME = File.expand_path(ENV['HOME'])
   PARENT_OF_HOME = File.expand_path('..', HOME)
 
+  FNMATCH_FLAGS =
+    File::FNM_DOTMATCH | # Allow matching on Unix hidden dotfiles
+    File::FNM_EXTGLOB    # Allow matching with {..., ...} group patterns
+
   #
   # More intuitive behavior for fnmatch
   #
   def self.fnmatch?(pattern, path)
-    pattern =
-      if pattern.start_with?('*')
-        pattern
-      else
-        "**/#{pattern}"
-      end
-
-    pattern =
-      if !pattern.end_with?('/') && !pattern.end_with?('\\')
-        pattern
-      else
-        "#{pattern}*"
-      end
-
-    File.fnmatch(pattern, path)
+    File.fnmatch(pattern, path, FNMATCH_FLAGS) ||
+      File.fnmatch("**/#{pattern}", path, FNMATCH_FLAGS) ||
+      ((pattern.end_with?('/') || pattern.end_with?('\\')) &&
+        File.fnmatch("**/#{pattern}*", path, FNMATCH_FLAGS))
   end
 
   #
   # Smacker dotfile scanner/enumerator.
   #
   class Smacker
-    attr_accessor :dotignore, :dotconfig, :path2ignore, :path2config
+    attr_accessor :dotignore, :dotconfig, :additional_ignores, :path2ignore, :path2config
 
     #
     # Create a Smacker dotfile scanner/enumerator.
@@ -52,9 +45,10 @@ module Dotsmack
     # @dotignore Filename for ignore patterns (optional)
     # @dotconfig Filename for configuration (optional)
     #
-    def initialize(dotignore = nil, dotconfig = nil)
+    def initialize(dotignore = nil, additional_ignores = [], dotconfig = nil)
       @dotignore = dotignore
       @dotconfig = dotconfig
+      @additional_ignores = additional_ignores
 
       @path2dotignore = {}
       @path2dotconfig = {}
@@ -170,7 +164,7 @@ module Dotsmack
 
       scan_for_dotignore!(dir)
 
-      @path2dotignore[dir].any? do |pattern|
+      (@path2dotignore[dir] + @additional_ignores).any? do |pattern|
         Dotsmack::fnmatch?(pattern, path)
       end
     end
@@ -206,7 +200,7 @@ module Dotsmack
     #
     # Returns [file, dotconfig] pairs.
     #
-    def enumerate(paths, additional_ignores = [])
+    def enumerate(paths)
       files = []
 
       paths.each do |path|
@@ -225,21 +219,9 @@ module Dotsmack
           nil
         elsif File.directory?(path) && (@dotignore.nil? || !ignore?(path))
           files.concat(
-            Find.find(path).reject do |p|
-              File.directory?(p) ||
-                (!@dotignore.nil? && ignore?(p)) ||
-                additional_ignores.any? do |pattern| Dotsmack::fnmatch?(pattern, path) end
-            end
-            .map do |p|
-              [
-                p,
-                if @dotconfig.nil?
-                  nil
-                else
-                  config(p)
-                end
-              ]
-            end
+            enumerate(
+              Find.find(path).reject do |p| File.directory?(p) end
+            )
           )
         elsif !ignore?(path)
           files << [
