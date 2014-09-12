@@ -33,15 +33,15 @@ module Dotsmack
       true
     # Consider path as directory
     else
-      path =
-        if path.end_with?(File::SEPARATOR)
-          path
+      pattern =
+        if pattern.end_with?(File::SEPARATOR)
+          "#{pattern}*"
         else
-          "#{path}#{File::SEPARATOR}"
+          "#{pattern}#{File::SEPARATOR}*"
         end
 
-      File.fnmatch("#{pattern}*", path, FNMATCH_FLAGS) ||
-        File.fnmatch("**#{File::SEPARATOR}#{pattern}*", path, FNMATCH_FLAGS)
+      File.fnmatch(pattern, path, FNMATCH_FLAGS) ||
+        File.fnmatch("**#{File::SEPARATOR}#{pattern}", path, FNMATCH_FLAGS)
     end
   end
 

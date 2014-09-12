@@ -16,5 +16,8 @@ describe Dotsmack, '#fnmatch?' do
 
     expect(File.fnmatch?('target', 'target/')).to eq(false)
     expect(Dotsmack::fnmatch?('target', 'target/')).to eq(true)
+
+    expect(File.fnmatch?('target', 'target_store')).to eq(false)
+    expect(Dotsmack::fnmatch?('target', 'target_store')).to eq(false)
   end
 end
