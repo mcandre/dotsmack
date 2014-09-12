@@ -27,10 +27,22 @@ module Dotsmack
   # More intuitive behavior for fnmatch
   #
   def self.fnmatch?(pattern, path)
-    File.fnmatch(pattern, path, FNMATCH_FLAGS) ||
-      File.fnmatch("**/#{pattern}", path, FNMATCH_FLAGS) ||
-      ((pattern.end_with?('/') || pattern.end_with?('\\')) &&
-        File.fnmatch("**/#{pattern}*", path, FNMATCH_FLAGS))
+    # Assume non-directory path
+    if File.fnmatch(pattern, path, FNMATCH_FLAGS) ||
+        File.fnmatch("**#{File::SEPARATOR}#{pattern}", path, FNMATCH_FLAGS)
+      true
+    # Consider path as directory
+    else
+      path =
+        if path.end_with?(File::SEPARATOR)
+          path
+        else
+          "#{path}#{File::SEPARATOR}"
+        end
+
+      File.fnmatch("#{pattern}*", path, FNMATCH_FLAGS) ||
+        File.fnmatch("**#{File::SEPARATOR}#{pattern}*", path, FNMATCH_FLAGS)
+    end
   end
 
   #

@@ -13,5 +13,8 @@ describe Dotsmack, '#fnmatch?' do
 
     expect(File.fnmatch?('*.{bat,ps1}', 'hello.bat')).to eq(false)
     expect(Dotsmack::fnmatch?('*.{bat,ps1}', 'hello.bat')).to eq(true)
+
+    expect(File.fnmatch?('target', 'target/')).to eq(false)
+    expect(Dotsmack::fnmatch?('target', 'target/')).to eq(true)
   end
 end
