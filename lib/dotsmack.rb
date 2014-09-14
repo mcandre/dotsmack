@@ -33,6 +33,13 @@ module Dotsmack
       true
     # Consider path as directory
     else
+      path =
+        if path.end_with?(File::SEPARATOR)
+          path
+        else
+          "#{path}#{File::SEPARATOR}"
+        end
+
       pattern =
         if pattern.end_with?(File::SEPARATOR)
           "#{pattern}*"
