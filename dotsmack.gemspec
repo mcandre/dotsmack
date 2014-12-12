@@ -15,6 +15,8 @@ Gem::Specification.new { |s|
   s.files = Dir['lib/*.rb'] + Dir['*.md']
   s.homepage = 'https://github.com/mcandre/dotsmack'
 
+  s.required_ruby_version = '>= 2.0'
+
   s.add_dependency 'ptools', '~> 1.2'
 
   s.add_development_dependency 'rake', '~> 10.3'
