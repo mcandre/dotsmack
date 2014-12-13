@@ -1,23 +1,8 @@
 # dotsmack - a library for modern, per-directory dotfile configuration
 
-# HOMEPAGE
+dotsmack is a customizable framework for managing per-project configuration files.
 
-https://github.com/mcandre/dotsmack
-
-# RUBYGEMS
-
-https://rubygems.org/gems/dotsmack
-
-# ABOUT
-
-Dotsmack is a Ruby library for adding modern dotfile customization to your Ruby applications.
-
-* Recursive file scanning, like `jshint .`
-* dotignore files - [fnmatch](http://man.cx/fnmatch) syntax, like `.gitignore`
-* dotconfig files - any format (getoptlong, YAML, JSON, ...)
-* Searches for dotfiles in `.`, `..`, etc., up to `$HOME`.
-
-# EXAMPLES
+# EXAMPLE
 
 ```
 $ tree -a examples/twitch/
@@ -56,6 +41,23 @@ examples/twitch/test/a-tale-of-two-cities.txt: 614
 $ examples/twitch/bin/twitch < examples/twitch/test/a-tale-of-two-cities.txt 
 -: 614
 ```
+
+# HOMEPAGE
+
+https://github.com/mcandre/dotsmack
+
+# RUBYGEMS
+
+https://rubygems.org/gems/dotsmack
+
+# ABOUT
+
+Dotsmack is a Ruby library for adding modern dotfile customization to your Ruby applications.
+
+* Recursive file scanning, like `jshint .`
+* dotignore files - [fnmatch](http://man.cx/fnmatch) syntax, like `.gitignore`
+* dotconfig files - any format (getoptlong, YAML, JSON, ...)
+* Searches for dotfiles in `.`, `..`, etc., up to `$HOME`.
 
 More examples:
 
