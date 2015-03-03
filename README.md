@@ -24,7 +24,7 @@ examples/twitch/
 
 5 directories, 9 files
 
-$ head examples/twitch/bin/twitch 
+$ head examples/twitch/bin/twitch
 #!/usr/bin/env ruby
 
 #
@@ -38,7 +38,7 @@ require 'yaml'
 $ examples/twitch/bin/twitch examples/twitch/test/
 examples/twitch/test/a-tale-of-two-cities.txt: 614
 
-$ examples/twitch/bin/twitch < examples/twitch/test/a-tale-of-two-cities.txt 
+$ examples/twitch/bin/twitch < examples/twitch/test/a-tale-of-two-cities.txt
 -: 614
 ```
 
