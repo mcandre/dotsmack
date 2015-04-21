@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'find'
 
+require_relative 'version'
+
 #
 # Dotsmack - File, dotignore, and dotconfig scanner.
 #
