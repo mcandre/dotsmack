@@ -69,7 +69,12 @@ More examples:
 
 # REQUIREMENTS
 
-* [Ruby](https://www.ruby-lang.org/) 2.3+
+* [ruby](https://www.ruby-lang.org/) 2.3+
+
+## Optional
+
+* [pargs](https://github.com/mcandre/pargs)
+* [editorconfig-tools](https://www.npmjs.com/package/editorconfig-tools)
 
 # INSTALL
 
