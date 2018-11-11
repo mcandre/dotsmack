@@ -9,58 +9,58 @@ require 'dotsmack'
 require 'yaml'
 
 DEFAULT_IGNORES = %w(
-  .twitchignore
-  .twitchrc.yml
+    .twitchignore
+    .twitchrc.yml
 )
 
 DEFAULT_CONFIG = {
-  'maxchars' => 140
+    'maxchars' => 140
 }
 
 #
 # Naive Tweet validation
 #
 def twitch(tweet, config = nil)
-  config =
+    config =
     if config.nil?
-      DEFAULT_CONFIG
+        DEFAULT_CONFIG
     else
-      YAML.load(config)
+        YAML.load(config)
     end
 
-  tweet.length < config['maxchars']
+    tweet.length < config['maxchars']
 end
 
 def main
-  dotsmack = Dotsmack::Smacker.new(
-    dotignore = '.twitchignore',
-    default_ignores = DEFAULT_IGNORES,
-    dotconfig = '.twitchrc.yml'
-  )
+    dotsmack = Dotsmack::Smacker.new(
+        dotignore = '.twitchignore',
+        default_ignores = DEFAULT_IGNORES,
+        dotconfig = '.twitchrc.yml'
+    )
 
-  filenames =
+    filenames =
     if ARGV == []
-      ['-']
+        ['-']
     else
-      ARGV
+        ARGV
     end
 
-  dotsmack.enumerate(filenames).each do |filename, config|
-    stream =
-      if filename == '-'
-        STDIN
-      else
-        open(filename)
-      end
+    dotsmack.enumerate(filenames).each do |filename, config|
+        stream =
+        if filename == '-'
+            STDIN
+        else
+            open(filename)
+        end
 
-    tweet = stream.read
+        tweet = stream.read
 
-    if !twitch(tweet, config)
-      puts "#{filename}: #{tweet.length}"
+        if !twitch(tweet, config)
+            puts "#{filename}: #{tweet.length}"
+        end
     end
-  end
 end
 
 if $PROGRAM_NAME == __FILE__
-  main
+    main
 end

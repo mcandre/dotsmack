@@ -4,7 +4,7 @@ dotsmack is a customizable framework for managing per-project configuration file
 
 # EXAMPLE
 
-```
+```console
 $ tree -a examples/twitch/
 examples/twitch/
 ├── bin
@@ -73,14 +73,17 @@ More examples:
 
 ## Optional
 
-* [pargs](https://github.com/mcandre/pargs)
-* [editorconfig-tools](https://www.npmjs.com/package/editorconfig-tools)
+* [make](https://www.gnu.org/software/make/)
+* [GNU findutils](https://www.gnu.org/software/findutils/)
+* [stank](https://github.com/mcandre/stank) (e.g. `go get github.com/mcandre/stank/...`)
+* [Python](https://www.python.org) 3+ (for yamllint)
+* [Node.js](https://nodejs.org/en/) (for eclint)
 
 # INSTALL
 
 Install via [RubyGems](http://rubygems.org/):
 
-```
+```console
 $ gem install aspelllint
 ```
 
@@ -94,7 +97,7 @@ FreeBSD
 
 Keep the interface working:
 
-```
+```console
 $ cucumber
 ```
 
@@ -102,7 +105,7 @@ $ cucumber
 
 Keep the code tidy:
 
-```
+```console
 $ rake lint
 ```
 
